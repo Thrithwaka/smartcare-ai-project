@@ -1,0 +1,24 @@
+# Core data handling
+pandas==2.2.2
+numpy==1.26.4
+
+# Visualization
+matplotlib==3.8.4
+seaborn==0.13.2
+
+# Machine learning
+scikit-learn==1.4.2
+xgboost==2.0.3
+
+# Explainable AI
+shap==0.45.0
+lime==0.2.0.1
+
+# Prototype
+streamlit==1.33.0
+# flask==3.0.3          # uncomment if using Flask instead of Streamlit
+
+# Utilities
+joblib==1.4.0
+jupyter==1.0.0
+notebook==7.1.3

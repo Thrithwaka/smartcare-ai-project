@@ -1,0 +1,24 @@
+# Environments
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data (do not commit large/raw data if repo has size limits; discuss with team)
+# data/raw/*.csv
+# data/processed/*.csv
+
+# Models (optional — large .pkl files may exceed GitHub limits)
+# models/*.pkl
+
+# OS/Editor
+.DS_Store
+.vscode/
+.idea/
+
+# Streamlit
+.streamlit/
