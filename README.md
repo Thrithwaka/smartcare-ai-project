@@ -270,9 +270,9 @@ consumes the previous stage's output.
 
 | Contributor | Responsibility |
 |---|---|
-| [Chanuu](https://github.com/<add-username>) | Data preprocessing and feature engineering |
+| [Thrithwaka](https://github.com/Thrithwaka>) | Data preprocessing and feature engineering |
 | [Avishka](https://github.com/deshanavishka125-dot) | Exploratory data analysis |
-| [Thrithwaka](https://github.com/Thrithwaka) | Model development and hyperparameter tuning |
+| [Chanu](https://github.com/Anuradhi-Gunawardhana) | Model development and hyperparameter tuning |
 | [Ramda](https://github.com/<add-username>) | Model evaluation and selection |
 | [Tharindu](https://github.com/nvtharindukothalawala-tech) | Explainable AI analysis and prototype development |
 
