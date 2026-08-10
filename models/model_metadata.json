@@ -3,10 +3,9 @@
     "file": "logistic_regression.pkl",
     "best_params": {
       "C": 10,
-      "penalty": "l2",
-      "solver": "lbfgs"
+      "solver": "sag"
     },
-    "cv_f1_macro": 0.9269,
+    "cv_f1_macro": 0.927,
     "baseline_f1_macro": 0.923,
     "random_state": 42
   },
@@ -15,23 +14,23 @@
     "best_params": {
       "criterion": "entropy",
       "max_depth": null,
-      "min_samples_leaf": 1,
-      "min_samples_split": 5
+      "min_samples_leaf": 2,
+      "min_samples_split": 2
     },
-    "cv_f1_macro": 0.7367,
-    "baseline_f1_macro": 0.6682,
+    "cv_f1_macro": 0.7312,
+    "baseline_f1_macro": 0.6649,
     "random_state": 42
   },
   "Random Forest": {
     "file": "random_forest.pkl",
     "best_params": {
-      "max_depth": 15,
+      "max_depth": 10,
       "min_samples_leaf": 2,
       "min_samples_split": 5,
-      "n_estimators": 100
+      "n_estimators": 300
     },
-    "cv_f1_macro": 0.7828,
-    "baseline_f1_macro": 0.7391,
+    "cv_f1_macro": 0.7825,
+    "baseline_f1_macro": 0.7403,
     "random_state": 42
   },
   "XGBoost": {
