@@ -1,41 +1,34 @@
 """
-config.py
-Shared project configuration: file paths, constants, random seed.
-Import this in every module so paths are consistent across the whole team.
+Centralized paths and configuration for the SmartCare AI project.
+All notebooks and scripts should import paths from here rather than
+hardcoding relative paths, so the project works the same way regardless
+of which machine or working directory it is run from.
 """
 
-import os
+from pathlib import Path
 
-# --- Base paths ---
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-DATA_RAW_DIR = os.path.join(BASE_DIR, "data", "raw")
-DATA_PROCESSED_DIR = os.path.join(BASE_DIR, "data", "processed")
-MODELS_DIR = os.path.join(BASE_DIR, "models")
-REPORTS_DIR = os.path.join(BASE_DIR, "reports")
-FIGURES_DIR = os.path.join(REPORTS_DIR, "figures")
+DATA_DIR = PROJECT_ROOT / "data"
+RAW_DATA_DIR = DATA_DIR / "raw"
+PROCESSED_DATA_DIR = DATA_DIR / "processed"
 
-RAW_DATA_FILE = os.path.join(DATA_RAW_DIR, "smartcare_ai_dataset_1000.csv")
-DATA_DICTIONARY_FILE = os.path.join(DATA_RAW_DIR, "smartcare_ai_dataset_data_dictionary.csv")
+MODELS_DIR = PROJECT_ROOT / "models"
+REPORTS_DIR = PROJECT_ROOT / "reports"
+FIGURES_DIR = REPORTS_DIR / "figures"
 
-TRAIN_FILE = os.path.join(DATA_PROCESSED_DIR, "train.csv")
-TEST_FILE = os.path.join(DATA_PROCESSED_DIR, "test.csv")
-PROCESSED_FULL_FILE = os.path.join(DATA_PROCESSED_DIR, "processed_full.csv")
+RAW_DATASET_PATH = RAW_DATA_DIR / "smartcare_ai_dataset_1000.csv"
+CLEAN_DATASET_PATH = PROCESSED_DATA_DIR / "smartcare_clean_dataset.csv"
 
-MODEL_FILES = {
-    "logistic_regression": os.path.join(MODELS_DIR, "logistic_regression.pkl"),
-    "random_forest": os.path.join(MODELS_DIR, "random_forest.pkl"),
-    "xgboost": os.path.join(MODELS_DIR, "xgboost_model.pkl"),
-}
-BEST_MODEL_FILE = os.path.join(MODELS_DIR, "best_model.pkl")
-MODEL_METADATA_FILE = os.path.join(MODELS_DIR, "model_metadata.json")
-MODEL_COMPARISON_TABLE = os.path.join(REPORTS_DIR, "model_comparison_table.csv")
+X_TRAIN_PATH = PROCESSED_DATA_DIR / "X_train.csv"
+X_TEST_PATH = PROCESSED_DATA_DIR / "X_test.csv"
+Y_TRAIN_PATH = PROCESSED_DATA_DIR / "y_train.csv"
+Y_TEST_PATH = PROCESSED_DATA_DIR / "y_test.csv"
 
-# --- Task selection: OPTION C selected ---
-TARGET_VARIABLE = "disease_risk_level"
-CLASS_LABELS = ["Low", "Medium", "High"]
-PROBLEM_TYPE = "multiclass"
+RANDOM_STATE = 42
 
-# --- Reproducibility ---
-RANDOM_SEED = 42
-TEST_SIZE = 0.2
+RISK_ORDER = ["Low", "Medium", "High"]
+RISK_LABEL_MAP = {0: "Low", 1: "Medium", 2: "High"}
+
+for directory in [MODELS_DIR, FIGURES_DIR / "models"]:
+    directory.mkdir(parents=True, exist_ok=True)
