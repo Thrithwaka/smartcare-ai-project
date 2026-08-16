@@ -1,15 +1,17 @@
 # Literature Review
 
-Task 01 requires a minimum of **5 peer-reviewed research papers** discussing:
-- Existing AI approaches to disease risk / clinical risk prediction
-- Common algorithms used in this space
-- Current limitations
-- Research gaps that this coursework project addresses
+This directory contains the research literature, reference management resources, and supporting materials used throughout the SmartCare AI project.
 
-## Structure
-- `references.bib` — BibTeX entries for all cited papers (for the technical report)
-- `papers/` — optional local copies of the PDFs (check copyright/redistribution terms before committing to a public repo)
+The literature review focuses on machine learning for healthcare risk prediction, explainable artificial intelligence (XAI), clinical decision support, human-AI interaction, model transparency, trust calibration, and ethical considerations in AI-assisted healthcare systems.
 
-## Suggested search terms
-"disease risk prediction machine learning", "clinical risk stratification AI",
-"explainable AI healthcare", "multi-class classification patient risk"
+The research collected here supports the development, evaluation, explainability analysis, and prototype design of SmartCare AI.
+
+---
+
+## Directory Contents
+
+```text
+literature_review/
+├── AI research.xlsx
+├── references.bib
+└── README.md
