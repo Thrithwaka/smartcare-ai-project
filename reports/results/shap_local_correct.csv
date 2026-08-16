@@ -1,0 +1,67 @@
+feature,shap_value
+blood_sugar_mg_dl,18.33403906554104
+age,11.12124658623961
+bmi,6.912620958889174
+previous_admissions,5.480113623690635
+cholesterol_mg_dl,3.8914021886694576
+systolic_bp,2.5030290106462276
+blood_sugar_category_Diabetic,0.7739598036820902
+bmi_category_Normal,0.4593991318048586
+department_Neurology,0.4020479774185669
+blood_sugar_category_Normal,0.36731039772711344
+payment_method_Online,-0.3412592211841597
+age_group_Senior,0.31230775519324366
+diagnosis_Diabetes,-0.26607166762138634
+blood_group_B+,-0.26250626971605934
+bmi_category_Overweight,0.1387505879626147
+payment_status_Paid,0.13792541633280855
+health_burden_score,0.13627223842329786
+age_group_Adult,0.13613234982647646
+gender_Female,-0.13477746730950171
+department_General Medicine,-0.13407829220134007
+payment_method_Card,-0.1322464107378392
+bmi_category_Obese,-0.11297583588063326
+bp_category_Hypertensive,-0.10548159802663878
+gender_Male,-0.10422413841860151
+appointment_status_No-Show,0.09462654772427977
+department_Orthopedics,0.08283253904930475
+diagnosis_Migraine,-0.07786488606796288
+blood_group_O-,-0.07381167871115352
+blood_group_AB+,0.06775850822757805
+department_Pediatrics,0.06597180307776473
+payment_method_Cash,0.065556599389494
+blood_group_A+,-0.06169020879823881
+admitted,-0.057934715689945765
+diagnosis_Fracture,0.04772612662020675
+bp_category_Normal,-0.045693865959282404
+length_of_stay_days,-0.042722849227879264
+payment_status_Unpaid,-0.04265881136152668
+room_type_General Ward,-0.03940896360202636
+diagnosis_Kidney Infection,0.0390731627209031
+room_type_Not Admitted,-0.03867283443263968
+department_Radiology,-0.03586806693799723
+payment_method_Insurance,-0.035391405589097924
+diagnosis_Pneumonia,-0.03462284305581223
+payment_status_Partially Paid,0.034233213718627496
+age_group_Young Adult,-0.03422387715720176
+blood_group_B-,0.03314520552042554
+blood_group_AB-,-0.03235502745283196
+appointment_status_Completed,0.03028617663994383
+department_Cardiology,0.02814933803194878
+diagnosis_Chest Pain,-0.023983708481177646
+diagnosis_Hypertension,0.021827151915508658
+diagnosis_Back Pain,0.02023166027736951
+appointment_status_Scheduled,0.016959635039945357
+diastolic_bp,0.015104546904095238
+blood_sugar_category_Prediabetic,0.012571304535915331
+bp_category_Elevated,-0.011310836158344087
+diagnosis_Fever,0.01107734766382477
+department_Laboratory Services,0.008903506849309534
+room_type_Private Room,0.008121305688991675
+bmi_category_Underweight,-0.005675505357942022
+diagnosis_Asthma,0.005176695251051074
+blood_group_O+,0.004141931830163909
+age_group_Child,0.0034741644479200275
+room_type_ICU,-0.0031284921691442174
+appointment_status_Cancelled,-0.003048647451548238
+blood_group_A-,-0.002188819850656569

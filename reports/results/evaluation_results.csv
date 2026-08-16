@@ -1,0 +1,16 @@
+Model,Class,Precision,Recall,F1,Support
+Logistic Regression,Low,1.0,0.8077,0.8936,26.0
+Logistic Regression,Medium,0.9062,0.9255,0.9158,94.0
+Logistic Regression,High,0.9157,0.95,0.9325,80.0
+Decision Tree,Low,0.7308,0.7308,0.7308,26.0
+Decision Tree,Medium,0.7255,0.7872,0.7551,94.0
+Decision Tree,High,0.8056,0.725,0.7632,80.0
+Random Forest,Low,0.8824,0.5769,0.6977,26.0
+Random Forest,Medium,0.7273,0.766,0.7461,94.0
+Random Forest,High,0.7619,0.8,0.7805,80.0
+XGBoost,Low,0.8947,0.6538,0.7556,26.0
+XGBoost,Medium,0.8454,0.8723,0.8586,94.0
+XGBoost,High,0.881,0.925,0.9024,80.0
+Voting Ensemble,Low,0.9,0.6923,0.7826,26.0
+Voting Ensemble,Medium,0.86,0.9149,0.8866,94.0
+Voting Ensemble,High,0.925,0.925,0.925,80.0

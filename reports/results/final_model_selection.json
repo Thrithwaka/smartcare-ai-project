@@ -1,0 +1,14 @@
+{
+  "selected_model": "Logistic Regression",
+  "primary_metric": "macro_f1",
+  "primary_metric_value": 0.914,
+  "supporting_metrics": {
+    "accuracy": 0.92,
+    "macro_precision": 0.9406,
+    "macro_recall": 0.8944,
+    "macro_roc_auc": 0.9914
+  },
+  "selection_reason": "Logistic Regression achieved the highest Macro F1 (0.9140) among all evaluated models on the held-out test set, with supporting metrics consistent with this ranking.",
+  "evaluation_dataset": "held-out test set",
+  "feature_count": 66
+}

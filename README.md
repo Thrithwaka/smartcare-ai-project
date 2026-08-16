@@ -1,323 +1,970 @@
-# SmartCare Hospital AI — Disease Risk Classification System
+# SmartCare AI
 
-A machine learning system that classifies hospital patients into disease risk
-categories (Low, Medium, High) using clinical, demographic, and operational
-data. Built to support preventive care planning and clinical decision-making
-through interpretable, evaluated, and deployable predictive models.
+## AI-Powered Disease Risk Classification System
 
-This repository contains the full pipeline: data preprocessing, exploratory
-analysis, model training and comparison, evaluation, explainability, and a
-deployed prediction prototype.
+SmartCare AI is a group-developed machine learning system for classifying hospital patients into three disease-risk categories: **Low, Medium, and High**.
+
+The system combines patient demographic, clinical, hospital-administrative, and healthcare-related information to generate an ML-based risk prediction. The project is designed as an end-to-end machine learning workflow covering data understanding, preprocessing, exploratory data analysis, model development, hyperparameter optimization, ensemble learning, model evaluation, explainable AI, and an interactive Streamlit prototype.
+
+> **Important:** SmartCare AI is a research and decision-support prototype. It is not a medical diagnostic system and must not be used as a substitute for qualified clinical judgement.
 
 ---
 
 ## Table of Contents
 
 - [Overview](#overview)
-- [Problem Statement](#problem-statement)
+- [Project Objectives](#project-objectives)
+- [Problem Definition](#problem-definition)
 - [Dataset](#dataset)
 - [System Architecture](#system-architecture)
-- [Repository Structure](#repository-structure)
-- [Technology Stack](#technology-stack)
-- [Getting Started](#getting-started)
-- [Pipeline Execution](#pipeline-execution)
+- [Machine Learning Pipeline](#machine-learning-pipeline)
 - [Model Development](#model-development)
-- [Evaluation](#evaluation)
-- [Explainability](#explainability)
-- [Prototype Application](#prototype-application)
-- [Branching Strategy](#branching-strategy)
-- [Contribution Workflow](#contribution-workflow)
-- [Team](#team)
-- [Reports and Documentation](#reports-and-documentation)
+- [Model Evaluation](#model-evaluation)
+- [Explainable AI](#explainable-ai)
+- [Prediction Prototype](#prediction-prototype)
+- [Technology Stack](#technology-stack)
+- [System Requirements](#system-requirements)
+- [Python and Package Versions](#python-and-package-versions)
+- [Repository Structure](#repository-structure)
+- [Getting Started](#getting-started)
+- [Running the Project](#running-the-project)
+- [Expected Outputs](#expected-outputs)
+- [Model and Data Artifacts](#model-and-data-artifacts)
+- [Reproducibility](#reproducibility)
+- [Team and Responsibilities](#team-and-responsibilities)
+- [Git Workflow](#git-workflow)
+- [Limitations](#limitations)
+- [Future Improvements](#future-improvements)
 - [License](#license)
 
 ---
 
 ## Overview
 
-Healthcare providers generate large volumes of patient, clinical, and
-operational data, but extracting actionable insight from it at scale requires
-systematic, well-validated modeling rather than ad hoc analysis. This project
-implements a complete, reproducible machine learning workflow — from raw data
-to a deployed prediction interface — to classify patient disease risk level
-based on demographic, clinical, and operational features.
+Healthcare datasets contain a combination of demographic, clinical, administrative, and operational information that can be used to identify patterns associated with patient risk.
 
-The system is designed with the same rigor expected in a production ML
-project: modular, testable source code separated from exploratory notebooks;
-a documented and reproducible preprocessing pipeline; multiple models trained
-and compared under consistent evaluation criteria; and model interpretability
-built in from the start rather than added as an afterthought.
+SmartCare AI applies supervised machine learning to classify patient records into:
 
-## Problem Statement
+- **Low**
+- **Medium**
+- **High**
 
-Early identification of patient disease risk enables preventive intervention,
-better resource allocation, and improved patient outcomes. Manual risk
-assessment does not scale with hospital data volume and is subject to
-inconsistency across clinicians.
+risk categories.
 
-This project addresses that gap by developing a supervised classification
-model that predicts a patient's disease risk level — Low, Medium, or High —
-from available clinical and demographic attributes, with transparent,
-explainable output suitable for clinical decision support.
+The project follows a structured ML workflow so that preprocessing, feature engineering, model training, evaluation, explainability, and prediction use consistent artifacts and logic.
 
-**Task type:** Multi-class classification
-**Target variable:** `disease_risk_level`
-**Classes:** `Low`, `Medium`, `High`
+The current pipeline contains:
+
+1. Dataset understanding
+2. Data preprocessing and feature engineering
+3. Exploratory data analysis
+4. Machine learning model development
+5. Hyperparameter optimization
+6. Ensemble learning
+7. Model evaluation and selection
+8. SHAP and LIME explainability
+9. Interactive Streamlit prediction prototype
+
+---
+
+## Project Objectives
+
+The main objectives of SmartCare AI are to:
+
+- Prepare a reliable dataset for machine learning.
+- Identify important patterns and relationships in patient data.
+- Engineer meaningful features for risk classification.
+- Train and compare multiple classification models.
+- Optimize model hyperparameters using cross-validation.
+- Investigate ensemble learning as an advanced modeling technique.
+- Evaluate models using appropriate multi-class classification metrics.
+- Identify the best-performing model based on Macro F1.
+- Explain model predictions using SHAP and LIME.
+- Provide an interactive prototype that accepts patient information and generates a model-based risk prediction.
+- Maintain a reproducible and modular project structure.
+
+---
+
+## Problem Definition
+
+### Problem Type
+
+**Multi-class classification**
+
+### Target Variable
+
+```text
+disease_risk_level
+```
+
+### Target Classes
+
+```text
+Low
+Medium
+High
+```
+
+The model learns patterns from the available patient attributes and predicts the corresponding risk category.
+
+The prediction is intended to support analysis and decision-making workflows. It does not establish medical diagnosis or causation.
+
+---
 
 ## Dataset
 
-The system uses the SmartCare Hospital AI Dataset, comprising 1,000 patient
-records across four domains:
+The SmartCare AI dataset contains **1,000 patient records** and includes information from several categories.
 
-| Domain | Attributes |
+### Major Data Domains
+
+| Domain | Example Attributes |
 |---|---|
-| Patient Information | Patient ID, Age, Gender, Blood Group |
-| Clinical Information | Diagnosis, Blood Pressure, Blood Sugar, Cholesterol, BMI |
-| Hospital Operations | Department, Appointment History, Previous Admissions, Length of Stay, Room Type, Treatment Count, Laboratory Test Count |
-| Financial Data | Consultation Charges, Laboratory Charges, Room Charges, Medicine Charges, Total Bill Amount |
+| Demographic | Age, Gender, Blood Group |
+| Clinical | Diagnosis, Systolic BP, Diastolic BP, Blood Sugar, Cholesterol, BMI |
+| Hospital / Admission | Admitted status, Length of Stay, Room Type, Previous Admissions, Previous Appointments |
+| Administrative | Department, Appointment Status |
+| Financial / Payment | Payment Method, Payment Status |
+| Target | Disease Risk Level |
 
-Raw data and the accompanying data dictionary are not committed to version
-control and must be placed locally under `data/raw/` (see
-[Getting Started](#getting-started)).
+The model-development pipeline produces a final model-ready representation containing **66 features** after preprocessing and feature engineering.
+
+### Data Privacy
+
+Raw datasets are not intended to be committed to the public repository unless their redistribution is explicitly permitted.
+
+Place locally required source data under:
+
+```text
+data/raw/
+```
+
+---
 
 ## System Architecture
 
-The pipeline is organized as a sequence of independently owned, testable
-stages, each consuming the previous stage's output and producing a defined
-artifact for the next:
-
+```text
+                    SmartCare AI
+                         |
+                         v
+                Raw Patient Dataset
+                         |
+                         v
+          Data Preprocessing & Cleaning
+                         |
+                         v
+            Feature Engineering
+                         |
+                         v
+                  66 ML Features
+                         |
+              +----------+----------+
+              |                     |
+              v                     v
+        Exploratory Data       Train / Test
+           Analysis              Split
+                                  |
+                                  v
+                       Model Development
+                                  |
+                  +---------------+---------------+
+                  |               |               |
+                  v               v               v
+             Logistic         Decision        Random
+            Regression          Tree          Forest
+                                  |
+                                  v
+                              XGBoost
+                                  |
+                                  v
+                    Hyperparameter Optimization
+                                  |
+                                  v
+                       Ensemble Learning
+                                  |
+                                  v
+                         Model Evaluation
+                                  |
+                                  v
+                       Final Model Selection
+                                  |
+                                  v
+                         Logistic Regression
+                                  |
+                    +-------------+-------------+
+                    |                           |
+                    v                           v
+             SHAP + LIME                  Streamlit App
+             Explainability               Prediction UI
+                    |                           |
+                    +-------------+-------------+
+                                  |
+                                  v
+                         Risk Prediction
+                     Low / Medium / High
 ```
-Raw Data
-   |
-   v
-Preprocessing & Feature Engineering  ->  data/processed/*.csv
-   |
-   v
-Exploratory Data Analysis            ->  reports/figures/eda/*.png
-   |
-   v
-Model Development                    ->  models/*.pkl
-   |
-   v
-Model Evaluation                     ->  reports/model_comparison_table.csv
-   |                                     models/best_model.pkl
-   v
-Explainable AI Analysis              ->  reports/figures/shap/*.png
-   |
-   v
-Prediction Prototype (Streamlit)     ->  interactive risk assessment
+
+---
+
+## Machine Learning Pipeline
+
+### Task 02 — Dataset Understanding
+
+The dataset is examined to understand:
+
+- Dataset dimensions
+- Feature types
+- Target variable
+- Missing values
+- Duplicate records
+- Data distributions
+- Class distribution
+- Data quality issues
+
+### Task 03 — Preprocessing and Feature Engineering
+
+The preprocessing stage prepares the dataset for model training.
+
+The workflow includes:
+
+- Data cleaning
+- Missing-value handling
+- Duplicate handling
+- Categorical encoding
+- Feature engineering
+- Feature selection
+- Train/test splitting
+- Numerical feature scaling
+- Saving preprocessing artifacts
+
+The model-ready dataset currently contains **66 features**.
+
+Important generated artifacts include:
+
+```text
+data/processed/X_train.csv
+data/processed/X_test.csv
+data/processed/y_train.csv
+data/processed/y_test.csv
+models/scaler.pkl
+models/feature_columns.pkl
 ```
 
-Each stage is implemented as an independent, importable Python module under
-`src/`, decoupled from any single notebook. Notebooks act as thin execution
-and reporting layers over this shared codebase, ensuring the same logic
-that produces the reported results is what runs in the prototype.
+### Task 04 — Exploratory Data Analysis
 
-## Repository Structure
+EDA is used to understand the structure and behaviour of the processed analytical data.
 
+The analysis includes:
+
+- Descriptive statistics
+- Correlation analysis
+- Distribution analysis
+- Pattern discovery
+- Histograms
+- Boxplots
+- Scatterplots
+- Correlation heatmaps
+- Class-distribution visualizations
+- Interpretation of observed patterns
+
+EDA findings are used to inform subsequent model development and interpretation.
+
+### Task 05 — Model Development
+
+The project trains and compares multiple classification models:
+
+- Logistic Regression
+- Decision Tree
+- Random Forest
+- XGBoost
+
+The workflow includes:
+
+- Baseline comparison
+- Hyperparameter selection
+- Cross-validation
+- Macro F1 optimization
+- Model comparison
+- Ensemble learning
+
+The project uses Macro F1 as an important model-selection metric because it evaluates performance across classes without allowing the majority class to dominate the score.
+
+### Task 06 — Model Evaluation
+
+The trained models are evaluated on the held-out test set.
+
+The evaluation includes:
+
+- Accuracy
+- Macro Precision
+- Macro Recall
+- Macro F1
+- Macro ROC-AUC
+- Confusion Matrix
+- Model comparison
+- Final model identification
+
+The current evaluation identifies:
+
+```text
+Best Model: Logistic Regression
+Macro F1:   0.9140
+Accuracy:   0.9200
+Macro Precision: 0.9406
+Macro Recall:    0.8944
+Macro ROC-AUC:   0.9914
 ```
-smartcare-ai-project/
-├── data/
-│   ├── raw/                    Original dataset and data dictionary (not versioned)
-│   └── processed/              Cleaned and feature-engineered data (generated)
-├── notebooks/                  Analysis and reporting notebooks, one per pipeline stage
-├── src/                        Core, reusable pipeline modules
-│   ├── config.py               Centralized paths and configuration
-│   ├── preprocessing.py        Data cleaning and preprocessing
-│   ├── feature_engineering.py  Feature construction and selection utilities
-│   ├── eda_utils.py            Exploratory analysis and visualization functions
-│   ├── train_models.py         Model training and hyperparameter tuning
-│   ├── evaluate.py             Model evaluation and comparison
-│   ├── explainability.py       SHAP-based model interpretation
-│   └── utils.py                Shared helper functions
-├── models/                     Trained model artifacts and metadata
-├── reports/                    Generated figures, comparison tables, technical report
-├── app/                        Streamlit prediction prototype
-├── literature_review/          Supporting research references
-├── presentation/               Presentation materials
-└── docs/                       Contribution log and internal documentation
+
+These values describe performance on the project's current dataset and test split. They should not be interpreted as evidence of clinical validity or guaranteed performance on external populations.
+
+---
+
+## Explainable AI
+
+SmartCare AI uses both **SHAP** and **LIME** to investigate model predictions.
+
+### SHAP Analysis
+
+The project includes:
+
+- Global feature importance
+- Class-specific feature importance
+- Local explanation of a correctly classified instance
+- Local explanation of a misclassified instance
+- Feature contribution analysis
+
+The current global SHAP analysis identified the following top features by mean absolute SHAP value:
+
+| Feature | Mean Absolute SHAP |
+|---|---:|
+| `blood_sugar_mg_dl` | 4.1121 |
+| `cholesterol_mg_dl` | 3.7737 |
+| `bmi` | 3.3995 |
+| `age` | 3.3306 |
+| `previous_admissions` | 2.2922 |
+
+### LIME Analysis
+
+LIME is used for local, model-agnostic explanations of individual predictions.
+
+### SHAP + LIME Comparison
+
+The project compares important features identified by SHAP and LIME for:
+
+- Correct predictions
+- Misclassified predictions
+
+The comparison helps investigate agreement and differences between two explainability approaches.
+
+### Explainability and Ethics
+
+SHAP and LIME describe the behaviour of the trained model. Their outputs should not be interpreted as proof that a feature causes a medical condition.
+
+The explanations are intended to support transparency, human review, and model error analysis.
+
+---
+
+## Prediction Prototype
+
+The project includes an interactive **Streamlit** prototype.
+
+The prototype:
+
+1. Accepts patient information from the user.
+2. Validates the supplied values.
+3. Applies the project's preprocessing and feature-engineering logic.
+4. Converts the information into the expected model feature representation.
+5. Loads the trained model and preprocessing artifacts.
+6. Generates a risk prediction.
+7. Displays the predicted risk category.
+8. Displays prediction probabilities where available.
+9. Provides model-based explanation information.
+10. Clearly communicates that the system is a prototype and not a medical diagnosis tool.
+
+Run the application with:
+
+```bash
+streamlit run app/streamlit_app.py
 ```
+
+---
 
 ## Technology Stack
 
-| Category | Tools |
-|---|---|
-| Language | Python 3.10+ |
-| Data Processing | Pandas, NumPy |
-| Visualization | Matplotlib, Seaborn |
-| Machine Learning | Scikit-learn, XGBoost |
-| Explainability | SHAP |
-| Prototype / Deployment | Streamlit |
-| Development Environment | Jupyter Notebook |
-| Version Control | Git, GitHub |
+| Category | Technology | Version |
+|---|---|---|
+| Programming Language | Python | 3.10.x |
+| Data Processing | NumPy | 1.26.4 |
+| Data Processing | Pandas | 2.2.2 |
+| Scientific Computing | SciPy | 1.15.3 |
+| Machine Learning | Scikit-learn | 1.7.2 |
+| Gradient Boosting | XGBoost | 3.0.2 |
+| Explainable AI | SHAP | 0.45.0 |
+| Explainable AI | LIME | 0.2.0.1 |
+| Visualization | Matplotlib | 3.8.4 |
+| Visualization | Seaborn | 0.13.2 |
+| Visualization | Plotly | 6.9.0 |
+| Prototype | Streamlit | 1.33.0 |
+| Model Persistence | Joblib | 1.4.0 |
+| Notebook Environment | Jupyter | 1.0.0 |
+| Notebook Environment | Notebook | 7.1.3 |
+| Python Kernel | ipykernel | 6.29.5 |
+
+All required dependencies are pinned in:
+
+```text
+requirements.txt
+```
+
+---
+
+## System Requirements
+
+### Minimum Software Requirements
+
+- **Operating System:** Windows 10/11, Ubuntu 20.04+, or macOS
+- **Python:** 3.10.x
+- **pip:** Compatible with Python 3.10
+- **Git:** Required for cloning the repository
+- **Web Browser:** Chrome, Edge, Firefox, or another modern browser
+- **Virtual Environment:** Recommended
+
+### Recommended Hardware
+
+| Component | Minimum | Recommended |
+|---|---:|---:|
+| CPU | 2 cores | 4+ cores |
+| RAM | 4 GB | 8 GB or more |
+| Free Storage | 2 GB | 5 GB or more |
+| Internet | Required for initial installation | Stable broadband connection |
+
+The model-development notebooks may require more time on lower-specification systems, particularly during hyperparameter optimization and explainability analysis.
+
+---
+
+## Python Version
+
+This project is developed and tested with:
+
+```text
+Python 3.10.x
+```
+
+Recommended Python version:
+
+```text
+Python 3.10.11
+```
+
+Check your installed Python version:
+
+```bash
+python --version
+```
+
+or:
+
+```bash
+python3 --version
+```
+
+Using the same Python major/minor version as the development environment is recommended for reproducibility.
+
+---
+
+## Repository Structure
+
+```text
+smartcare-ai-project/
+│
+├── app/
+│   ├── streamlit_app.py
+│   ├── utils/
+│   │   ├── preprocessing.py
+│   │   ├── prediction.py
+│   │   └── explainability.py
+│   └── assets/
+│       └── style.css
+│
+├── data/
+│   ├── raw/
+│   │   └── dataset files
+│   └── processed/
+│       ├── X_train.csv
+│       ├── X_test.csv
+│       ├── y_train.csv
+│       └── y_test.csv
+│
+├── models/
+│   ├── scaler.pkl
+│   ├── feature_columns.pkl
+│   └── trained model artifacts
+│
+├── notebooks/
+│   ├── Task 02 notebook
+│   ├── Task 03 notebook
+│   ├── Task 04 notebook
+│   ├── Task 05 notebook
+│   ├── Task 06 notebook
+│   └── Task 07 notebook
+│
+├── reports/
+│   ├── figures/
+│   │   ├── eda/
+│   │   ├── evaluation/
+│   │   └── explainability/
+│   └── results/
+│
+├── requirements.txt
+├── README.md
+└── LICENSE
+```
+
+The exact filenames may vary as the repository evolves, but the dependency flow between the pipeline stages should remain consistent.
+
+---
 
 ## Getting Started
 
-### Prerequisites
-
-- Python 3.10 or later
-- pip
-
-### Installation
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Thrithwaka/smartcare-ai-project.git
+```
+
+Move into the project directory:
+
+```bash
 cd smartcare-ai-project
+```
 
+### 2. Create a Virtual Environment
+
+#### Windows
+
+```bash
 python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
+venv\Scripts\activate
+```
 
+#### macOS / Linux
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### 3. Verify Python
+
+```bash
+python --version
+```
+
+Expected:
+
+```text
+Python 3.10.x
+```
+
+### 4. Upgrade pip
+
+```bash
+python -m pip install --upgrade pip
+```
+
+### 5. Install Dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-### Data Setup
-
-Place the following files, provided separately, into `data/raw/`:
-
-- `smartcare_ai_dataset_1000.csv`
-- `smartcare_ai_dataset_data_dictionary.csv`
-
-## Pipeline Execution
-
-Run each stage independently:
+### 6. Verify the Environment
 
 ```bash
-python -m src.preprocessing
-python -m src.train_models
-python -m src.evaluate
-python -m src.explainability
+python -c "import numpy, pandas, sklearn, xgboost, shap, lime, streamlit; print('SmartCare AI environment OK')"
 ```
 
-Or execute the full pipeline end-to-end via notebook:
+A successful installation should print:
+
+```text
+SmartCare AI environment OK
+```
+
+---
+
+## Data Setup
+
+Place the required dataset files inside:
+
+```text
+data/raw/
+```
+
+Example:
+
+```text
+data/raw/
+├── smartcare_ai_dataset_1000.csv
+└── smartcare_ai_dataset_data_dictionary.csv
+```
+
+Raw data should remain outside version control when redistribution is restricted.
+
+---
+
+## Running the Project
+
+### Run the Streamlit Prototype
+
+From the project root:
 
 ```bash
-jupyter notebook notebooks/06_final_pipeline_demo.ipynb
+streamlit run app/streamlit_app.py
 ```
 
-## Model Development
+Streamlit will provide a local address, normally similar to:
 
-Three classification models are trained and compared under consistent
-cross-validation and hyperparameter search:
+```text
+http://localhost:8501
+```
 
-- Logistic Regression — interpretable linear baseline
-- Random Forest — non-linear ensemble, robust to mixed feature types
-- XGBoost — gradient-boosted ensemble, typically the strongest baseline
+Open the displayed address in a web browser.
 
-Each model is tuned via grid search optimizing macro-averaged F1 score,
-selected over accuracy to account for potential class imbalance across
-the three risk categories.
+### Run the Notebooks
 
-## Evaluation
-
-Models are evaluated on a held-out, stratified test set using:
-
-- Accuracy
-- Precision (macro-averaged)
-- Recall (macro-averaged)
-- F1 Score (macro-averaged)
-- Confusion Matrix
-
-The highest macro-F1 model is selected as the production model and
-persisted to `models/best_model.pkl`. Full comparison results are written
-to `reports/model_comparison_table.csv`.
-
-## Explainability
-
-Model predictions are interpreted using SHAP (SHapley Additive exPlanations),
-providing both:
-
-- Global explanations — which features most influence predictions overall
-- Local explanations — why a specific patient received a specific
-  risk classification
-
-This supports transparency and clinical trust in model output, and is
-surfaced directly in the prediction prototype.
-
-## Prototype Application
-
-An interactive Streamlit application allows a user to input patient
-attributes and receive a real-time risk classification, along with the
-top contributing factors behind the prediction.
+Start Jupyter:
 
 ```bash
-streamlit run app/app.py
+jupyter notebook
 ```
 
-## Branching Strategy
+Then open the required notebook from:
 
-This repository follows a structured, task-ownership branching model:
+```text
+notebooks/
+```
 
-| Branch | Purpose |
+Recommended execution order:
+
+```text
+Task 02
+   ↓
+Task 03
+   ↓
+Task 04
+   ↓
+Task 05
+   ↓
+Task 06
+   ↓
+Task 07
+   ↓
+Task 08 Prototype
+```
+
+The order is important because later stages depend on artifacts and decisions produced by earlier stages.
+
+---
+
+## Expected Outputs
+
+### Task 03
+
+Generated preprocessing artifacts include:
+
+```text
+data/processed/X_train.csv
+data/processed/X_test.csv
+data/processed/y_train.csv
+data/processed/y_test.csv
+
+models/scaler.pkl
+models/feature_columns.pkl
+```
+
+### Task 04
+
+EDA outputs are stored under:
+
+```text
+reports/figures/eda/
+```
+
+Typical outputs include:
+
+```text
+histograms
+boxplots
+scatterplots
+correlation heatmaps
+class distribution charts
+```
+
+### Task 05
+
+Model-development outputs may include:
+
+```text
+trained model files
+hyperparameter search results
+cross-validation results
+model comparison results
+ensemble results
+```
+
+### Task 06
+
+Evaluation outputs are stored under:
+
+```text
+reports/figures/evaluation/
+reports/results/
+```
+
+Typical outputs include:
+
+```text
+confusion matrices
+metric comparison charts
+evaluation tables
+final model selection metadata
+```
+
+### Task 07
+
+Explainability outputs are stored under:
+
+```text
+reports/figures/explainability/
+reports/results/
+```
+
+Typical outputs include:
+
+```text
+SHAP summary plots
+class-specific SHAP plots
+local SHAP explanations
+misclassification explanations
+LIME explanations
+SHAP/LIME comparison results
+```
+
+### Task 08
+
+The Streamlit application provides:
+
+```text
+Patient input
+      ↓
+Input validation
+      ↓
+Feature processing
+      ↓
+Model prediction
+      ↓
+Risk classification
+      ↓
+Prediction probabilities
+      ↓
+Explainability information
+```
+
+---
+
+## Model and Data Artifacts
+
+The prototype depends on the same preprocessing and model artifacts generated by the ML pipeline.
+
+Important artifacts include:
+
+```text
+models/
+├── scaler.pkl
+├── feature_columns.pkl
+└── final trained model artifact(s)
+```
+
+### Artifact Consistency
+
+The following must remain consistent:
+
+```text
+Task 03 preprocessing
+        ↓
+Feature columns
+        ↓
+Scaler
+        ↓
+Task 05 trained model
+        ↓
+Task 06 selected model
+        ↓
+Task 07 explanation
+        ↓
+Task 08 prediction prototype
+```
+
+Do not replace the scaler, feature-column list, or final model independently without retraining and re-evaluating the pipeline.
+
+---
+
+## Reproducibility
+
+The project uses fixed package versions in `requirements.txt` to reduce environment differences.
+
+Where applicable, experiments use fixed random seeds to improve reproducibility.
+
+For a reproducible setup:
+
+1. Use Python 3.10.x.
+2. Create a fresh virtual environment.
+3. Install `requirements.txt`.
+4. Use the same dataset version.
+5. Execute the notebooks in the documented order.
+6. Preserve the generated preprocessing and model artifacts.
+7. Use the final selected model consistently in explainability and prototype stages.
+
+---
+
+## Team and Responsibilities
+
+SmartCare AI is developed as a collaborative group project.
+
+## Team and Responsibilities
+
+SmartCare AI is developed as a collaborative group project.
+
+| Contributor | Primary Responsibility |
 |---|---|
-| `main` | Stable, submission-ready state. Protected, merged only via reviewed pull request. |
-| `develop` | Integration branch where completed work is combined and validated before release to `main`. |
-| `chore/shared` | Shared, non-task-specific changes: documentation, configuration, dependencies. |
-| `feature/<owner>-<task>` | Individually owned pipeline stage development. |
-
-Merges into `develop` follow pipeline dependency order, since each stage
-consumes the previous stage's output.
-
-## Contribution Workflow
-
-1. Create or check out your assigned feature branch.
-2. Pull the latest `develop` before starting new work.
-3. Commit incrementally with clear, descriptive messages.
-4. Open a pull request into `develop`; require at least one review before merging.
-5. After full pipeline validation on `develop`, release to `main` via a
-   final reviewed pull request and tag the submission commit.
-
-## Team
-
-| Contributor | Responsibility |
-|---|---|
-| [Thrithwaka](https://github.com/Thrithwaka>) | Data preprocessing and feature engineering |
+| [Thrithwaka](https://github.com/Thrithwaka) | Data preprocessing and feature engineering |
 | [Avishka](https://github.com/deshanavishka125-dot) | Exploratory data analysis |
-| [Chanu](https://github.com/Anuradhi-Gunawardhana) | Model development and hyperparameter tuning |
-| [Ramda](https://github.com/<add-username>) | Model evaluation and selection |
+| [Chanu](https://github.com/Anuradhi-Gunawardhana) | Machine learning model development and hyperparameter optimization |
+| [Ramda](https://github.com/ramda12) | Model evaluation and model selection |
 | [Tharindu](https://github.com/nvtharindukothalawala-tech) | Explainable AI analysis and prototype development |
 
-Detailed individual contribution records are maintained in
-`docs/individual_contributions.md`.
+Individual contribution details can be maintained separately in the project's documentation.
 
-## Results
+---
 
-Model performance is evaluated on a held-out, stratified test set using
-macro-averaged precision, recall, and F1 score across all three risk
-classes. Full, up-to-date results are generated by the evaluation stage
-and written to `reports/model_comparison_table.csv`; summary figures are
-available under `reports/figures/`.
+## Git Workflow
 
-| Model | Accuracy | Precision (macro) | Recall (macro) | F1 (macro) |
-|---|---|---|---|---|
-| Logistic Regression | — | — | — | — |
-| Random Forest | — | — | — | — |
-| XGBoost | — | — | — | — |
+The repository uses Git for collaborative development.
 
-The model with the highest macro F1 score is selected as the production
-model (`models/best_model.pkl`). Regenerate this table by running
-`python -m src.evaluate`.
+Recommended workflow:
 
-## Documentation
+```text
+main
+  |
+  +-- develop
+        |
+        +-- feature/<name>-<task>
+        |
+        +-- chore/<purpose>
+```
 
-Further documentation is maintained under `docs/`, including design
-notes, the internal contribution log, and reviewer guidance. Research
-references supporting the modeling approach are collected in
-`literature_review/references.bib`.
+### Recommended Workflow
 
-## Roadmap
+```bash
+git checkout develop
+git pull origin develop
 
-Planned improvements beyond the current scope:
+git checkout -b feature/<name>-<task>
+```
 
-- Hyperparameter optimization via Bayesian search
-- Ensemble/stacking across the trained models
-- Deployment of the prototype to a managed cloud environment
-- Extension to additional prediction tasks (appointment no-show, readmission)
+After completing the work:
 
-## Acknowledgments
+```bash
+git add .
+git commit -m "Add <description>"
+git push origin feature/<name>-<task>
+```
 
-Built using open-source tooling from the scikit-learn, XGBoost, SHAP, and
-Streamlit communities.
+Changes should be reviewed before merging into the integration branch and ultimately into `main`.
+
+---
+
+## Limitations
+
+The current system has several limitations:
+
+- The dataset contains a limited number of records relative to real-world hospital datasets.
+- The model is trained and evaluated on the available dataset and may not generalize to external populations.
+- The system has not been clinically validated.
+- Predictions depend on the quality and completeness of the supplied patient information.
+- Explainability methods describe model behaviour and do not establish causal relationships.
+- The prototype is intended for research and demonstration purposes rather than autonomous clinical decision-making.
+- Real-world deployment would require additional privacy, security, validation, monitoring, governance, and regulatory considerations.
+
+---
+
+## Future Improvements
+
+Potential future development areas include:
+
+- External validation using independent healthcare datasets.
+- Larger and more representative datasets.
+- More advanced hyperparameter optimization methods.
+- Advanced ensemble and stacking techniques.
+- Additional prediction tasks such as readmission and appointment no-show prediction.
+- Model monitoring and drift detection.
+- Automated experiment tracking.
+- Cloud deployment.
+- Authentication and role-based access control.
+- Secure handling of sensitive healthcare information.
+- Continuous model evaluation and retraining.
+- More advanced explainability and fairness analysis.
+- Integration with healthcare information systems where appropriate governance and authorization exist.
+
+---
+
+## Security and Privacy
+
+Healthcare-related data can contain sensitive information.
+
+When working with real patient data:
+
+- Do not commit confidential datasets to Git.
+- Do not expose personally identifiable information.
+- Use appropriate access controls.
+- Protect model and data artifacts where required.
+- Follow applicable organizational, legal, and ethical requirements.
+- Use anonymized or synthetic data for public demonstrations whenever possible.
+
+The repository should contain only data that is legally and ethically appropriate to distribute.
+
+---
 
 ## License
 
-This project is licensed under the terms described in the `LICENSE` file.
+This project is licensed under the terms specified in the repository's `LICENSE` file.
+
+If a license has not yet been selected, add an appropriate license before public distribution.
+
+---
+
+## Acknowledgements
+
+The project uses open-source technologies including:
+
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- XGBoost
+- Matplotlib
+- Seaborn
+- Plotly
+- SHAP
+- LIME
+- Streamlit
+- Jupyter
+
+---
+
+## Contact
+
+For project-related questions, refer to the repository maintainers and contributors listed in the project documentation.
+
+Repository:
+
+https://github.com/Thrithwaka/smartcare-ai-project
