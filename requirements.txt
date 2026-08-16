@@ -1,16 +1,11 @@
-# SmartCare AI - Project Requirements
-# Recommended Python version: 3.10.x
+# SmartCare AI
+# Recommended Python: 3.10.x
 
 # Core Data Science
 numpy==1.26.4
 pandas==2.2.2
 scipy==1.15.3
 joblib==1.4.0
-
-# Visualization / EDA
-matplotlib==3.8.4
-seaborn==0.13.2
-plotly==6.9.0
 
 # Machine Learning
 scikit-learn==1.7.2
@@ -19,12 +14,16 @@ xgboost==3.0.2
 # Explainable AI
 shap==0.45.0
 lime==0.2.0.1
-scikit-image==0.25.2
+
+# Visualization
+matplotlib==3.8.4
+seaborn==0.13.2
+plotly==6.9.0
 
 # Streamlit Prototype
 streamlit==1.33.0
 
-# Image Processing
+# Image / visualization dependency
 Pillow==10.4.0
 
 # Notebook / Development
