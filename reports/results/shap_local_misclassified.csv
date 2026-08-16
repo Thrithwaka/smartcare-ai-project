@@ -1,0 +1,67 @@
+feature,shap_value
+cholesterol_mg_dl,1.1500991847639923
+blood_group_A-,0.7842530199128877
+systolic_bp,0.47260398800490755
+blood_sugar_mg_dl,-0.471133776285026
+age,0.3908080690210227
+previous_admissions,0.3852018417488541
+bp_category_Hypertensive,-0.26446333862652655
+diagnosis_Fracture,0.250191374000415
+age_group_Adult,0.21934212958626864
+blood_sugar_category_Diabetic,0.19848038772505536
+bp_category_Normal,-0.19262324564283162
+appointment_status_No-Show,0.18784065673484554
+health_burden_score,-0.1782808555033927
+bmi,0.16470214076891537
+length_of_stay_days,0.14009461317351588
+payment_method_Online,0.1332847928355414
+bmi_category_Obese,-0.12825258701069453
+bmi_category_Overweight,-0.1272230291767007
+blood_sugar_category_Prediabetic,0.11519863250570202
+bmi_category_Underweight,0.09908521520450839
+appointment_status_Completed,-0.08807155038363153
+age_group_Senior,-0.08238199993968498
+payment_status_Partially Paid,0.07817656809371677
+blood_group_AB-,0.07355393492527551
+room_type_General Ward,0.07138186555731914
+diastolic_bp,-0.06910445458245897
+diagnosis_Fever,0.05896219251398101
+diagnosis_Pneumonia,0.05650189109248782
+diagnosis_Diabetes,-0.05179577383041792
+department_Laboratory Services,-0.05158628627822439
+age_group_Young Adult,0.043669557705630496
+blood_sugar_category_Normal,-0.039797916232693305
+diagnosis_Hypertension,-0.03768906631427458
+admitted,-0.03739878168507643
+department_Pediatrics,-0.03666727939051693
+blood_group_A+,-0.03640929612613844
+diagnosis_Kidney Infection,-0.0351082382473758
+payment_method_Insurance,0.031227063653611647
+department_Cardiology,0.02773471625711503
+bmi_category_Normal,-0.024294579589556622
+room_type_Not Admitted,-0.02291270453364173
+department_Orthopedics,-0.021690146568921504
+department_Radiology,0.02150297762008452
+diagnosis_Asthma,0.02146164596652513
+payment_method_Cash,-0.02011264762626169
+gender_Male,-0.019854972553091578
+blood_group_O-,0.019710841059829967
+bp_category_Elevated,0.01809594746847982
+blood_group_B-,0.01715220672396773
+blood_group_B+,0.012841521824368079
+payment_method_Card,0.012609817439452274
+appointment_status_Cancelled,0.011804415364222482
+diagnosis_Chest Pain,0.011524283442566044
+department_Neurology,-0.0105694114169028
+blood_group_AB+,0.009694694542215379
+payment_status_Unpaid,0.008992670128142215
+department_General Medicine,0.007752903897664678
+diagnosis_Back Pain,0.007725416019651039
+room_type_Private Room,-0.007363855695437239
+gender_Female,0.007119102142686655
+payment_status_Paid,0.00668136518213588
+age_group_Child,0.005234264287461308
+blood_group_O+,-0.004384160459710736
+appointment_status_Scheduled,0.0036617437453090856
+diagnosis_Migraine,0.0029533699434309193
+room_type_ICU,-0.0016902692187013974

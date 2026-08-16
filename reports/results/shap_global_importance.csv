@@ -1,0 +1,67 @@
+feature,mean_abs_shap
+blood_sugar_mg_dl,4.112122170546625
+cholesterol_mg_dl,3.7737492702845334
+bmi,3.39945734287663
+age,3.3306258063704592
+previous_admissions,2.2922195694792147
+systolic_bp,1.9431372454210327
+blood_sugar_category_Diabetic,0.4673518531837324
+bmi_category_Normal,0.3652394035780681
+blood_sugar_category_Normal,0.293148679328876
+bmi_category_Obese,0.2706706611724237
+appointment_status_No-Show,0.2186124970268493
+bmi_category_Overweight,0.18020637169870557
+health_burden_score,0.1702849412982468
+age_group_Adult,0.16612937229477012
+age_group_Senior,0.15416059027005638
+blood_group_A-,0.14890374381249255
+length_of_stay_days,0.1475663258761002
+payment_method_Card,0.13018924434858425
+department_General Medicine,0.12806508394503854
+blood_sugar_category_Prediabetic,0.1158447429177329
+bmi_category_Underweight,0.11460856558654815
+department_Orthopedics,0.11004177308853062
+bp_category_Hypertensive,0.10880777360634303
+gender_Female,0.10238592876359744
+diagnosis_Fever,0.09898921678463261
+blood_group_A+,0.09840726807708122
+blood_group_AB+,0.09741891726156253
+department_Pediatrics,0.09675864451405448
+payment_status_Paid,0.09594131087887887
+admitted,0.09393088959755004
+diagnosis_Migraine,0.09017495377013589
+payment_method_Online,0.08819374111261497
+blood_group_AB-,0.08630328364565652
+appointment_status_Completed,0.08579205143252572
+department_Neurology,0.08194883332949121
+blood_group_O-,0.0772183715747453
+diagnosis_Diabetes,0.07596713495127966
+gender_Male,0.07576641714604634
+room_type_General Ward,0.0742371401796111
+department_Radiology,0.07301144292267853
+diagnosis_Fracture,0.06340343609181419
+blood_group_B+,0.06122358458017224
+room_type_Not Admitted,0.06067945287574294
+bp_category_Normal,0.05994097903786929
+payment_method_Cash,0.058946308951053746
+department_Cardiology,0.05625661465099077
+diagnosis_Pneumonia,0.05527768345215069
+diagnosis_Chest Pain,0.053403724218089164
+blood_group_B-,0.050710108960244214
+age_group_Young Adult,0.04813355693776008
+payment_status_Partially Paid,0.0465571706573337
+diagnosis_Kidney Infection,0.042719991241520795
+diagnosis_Back Pain,0.040164999613385856
+payment_method_Insurance,0.03633517640480807
+age_group_Child,0.034253153025833316
+payment_status_Unpaid,0.03263591225964871
+diagnosis_Hypertension,0.029146211283038747
+diagnosis_Asthma,0.023824239529975793
+appointment_status_Cancelled,0.02297926190901978
+appointment_status_Scheduled,0.022408564946643044
+bp_category_Elevated,0.01955781616593318
+department_Laboratory Services,0.0182795092310272
+diastolic_bp,0.01800309575379929
+room_type_Private Room,0.012200005879463132
+room_type_ICU,0.006360765031956161
+blood_group_O+,0.005962458225206371

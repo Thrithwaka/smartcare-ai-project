@@ -1,0 +1,11 @@
+feature_condition,lime_weight
+blood_sugar_mg_dl > 0.66,0.3474266565444571
+age > 0.65,0.3341170176110552
+bmi > 0.64,0.30993543464773016
+systolic_bp > 0.68,0.17846834565295577
+previous_admissions > 0.17,0.1703741490616162
+-0.04 < cholesterol_mg_dl <= 0.69,0.10139688724343998
+bp_category_Elevated <= 0.00,0.04130682933727385
+diagnosis_Fracture <= 0.00,0.037196466886941025
+blood_group_A+ <= 0.00,-0.035587295809325535
+appointment_status_Scheduled <= 0.00,-0.02914830500349984

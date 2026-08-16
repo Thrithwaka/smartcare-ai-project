@@ -1,0 +1,3 @@
+Instance,Actual Class,Predicted Class,SHAP Top Features,LIME Top Features,Overlapping Features
+Correct prediction,High,High,"cholesterol_mg_dl, blood_sugar_mg_dl, previous_admissions, bmi, age","blood_sugar_mg_dl, previous_admissions, bmi, systolic_bp, age","age, blood_sugar_mg_dl, bmi, previous_admissions"
+Misclassified prediction,Low,Medium,"cholesterol_mg_dl, blood_sugar_mg_dl, blood_group_A-, systolic_bp, age","cholesterol_mg_dl, blood_sugar_mg_dl, bmi, diagnosis_Migraine, age","cholesterol_mg_dl, blood_sugar_mg_dl, age"

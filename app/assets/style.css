@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Google+Sans:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined');
+
+html, body, [class*="css"] { font-family: 'Roboto', 'Google Sans', Arial, sans-serif; }
+
+.stApp { background-color: #F8F9FA; }
+.main .block-container { max-width: 860px; padding-top: 1.5rem; padding-bottom: 3rem; }
+
+#MainMenu, footer, header { visibility: hidden; }
+
+/* ---------- Widgets: light Material style ---------- */
+.stTextInput input, .stNumberInput input,
+.stSelectbox div[data-baseweb="select"] > div {
+    background-color: #FFFFFF !important; color: #202124 !important;
+    border: 1px solid #DADCE0 !important; border-radius: 8px !important; box-shadow: none !important;
+}
+.stTextInput input:focus, .stNumberInput input:focus,
+.stSelectbox div[data-baseweb="select"]:focus-within > div {
+    border: 1.5px solid #1A73E8 !important; box-shadow: 0 0 0 3px rgba(26,115,232,0.15) !important;
+}
+.stSelectbox svg { fill: #5F6368 !important; }
+.stNumberInput button { background-color: #F1F3F4 !important; color: #3C4043 !important; border: 1px solid #DADCE0 !important; }
+[data-baseweb="popover"] li { color: #202124 !important; background-color: #FFFFFF !important; }
+[data-baseweb="popover"] li:hover { background-color: #E8F0FE !important; }
+.stTextInput label, .stNumberInput label, .stSelectbox label {
+    color: #5F6368 !important; font-weight: 500 !important; font-size: 0.82rem !important;
+}
+
+/* ---------- Header ---------- */
+.sc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; }
+.sc-title { font-family: 'Google Sans', Roboto, sans-serif; font-size: 1.9rem; font-weight: 700; color: #202124; letter-spacing: -0.02em; }
+.sc-subtitle { font-size: 1rem; font-weight: 500; color: #1A73E8; margin-top: 0.1rem; }
+.sc-status { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: #1E8E3E; font-weight: 500; margin-top: 0.3rem; }
+.sc-status-dot { width: 8px; height: 8px; border-radius: 50%; background-color: #1E8E3E; }
+
+/* ---------- Hero ---------- */
+.sc-hero { font-size: 0.95rem; color: #5F6368; margin: 0.75rem 0 0.4rem 0; max-width: 640px; line-height: 1.5; }
+.sc-hero-tags { font-size: 0.8rem; color: #80868B; margin-bottom: 1.75rem; }
+
+/* ---------- How it works ---------- */
+.sc-steps { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
+.sc-step-card {
+    flex: 1; min-width: 120px; background-color: #FFFFFF; border: 1px solid #E8EAED;
+    border-radius: 10px; padding: 0.85rem 1rem;
+}
+.sc-step-num { font-size: 0.72rem; font-weight: 700; color: #1A73E8; letter-spacing: 0.04em; }
+.sc-step-label { font-size: 0.82rem; font-weight: 500; color: #202124; margin-top: 0.15rem; }
+
+/* ---------- Section headings ---------- */
+.sc-section-heading {
+    font-family: 'Google Sans', Roboto, sans-serif; font-size: 1.05rem; font-weight: 700;
+    color: #202124; margin: 2.2rem 0 0.9rem 0; display: flex; align-items: center; gap: 0.4rem;
+}
+.sc-section-sub { font-size: 0.85rem; color: #5F6368; margin-top: -0.6rem; margin-bottom: 1rem; }
+
+/* ---------- Assessment group labels (compact, no big card wrap) ---------- */
+.sc-group-label {
+    font-size: 0.78rem; font-weight: 700; color: #1A73E8; text-transform: uppercase;
+    letter-spacing: 0.04em; margin: 1.1rem 0 0.5rem 0; padding-top: 0.75rem;
+    border-top: 1px solid #F1F3F4;
+}
+.sc-group-label.first { border-top: none; padding-top: 0; margin-top: 0.4rem; }
+
+/* ---------- Result ---------- */
+.sc-result-wrap {
+    background-color: #FFFFFF; border: 1px solid #E8EAED; border-radius: 16px;
+    padding: 1.75rem; margin: 1.25rem 0 1.5rem 0;
+}
+.sc-result-eyebrow { font-size: 0.75rem; font-weight: 700; color: #80868B; text-transform: uppercase; letter-spacing: 0.06em; }
+.sc-result-value { font-family: 'Google Sans', Roboto, sans-serif; font-size: 2.1rem; font-weight: 700; margin: 0.2rem 0 0.5rem 0; }
+.sc-result-desc { font-size: 0.9rem; color: #3C4043; line-height: 1.5; margin-bottom: 1.25rem; }
+.sc-risk-low .sc-result-value { color: #1E8E3E; }
+.sc-risk-medium .sc-result-value { color: #F9AB00; }
+.sc-risk-high .sc-result-value { color: #D93025; }
+.sc-risk-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+.sc-risk-low .sc-risk-badge { background-color: #E6F4EA; color: #1E8E3E; }
+.sc-risk-medium .sc-risk-badge { background-color: #FEF7E0; color: #B06000; }
+.sc-risk-high .sc-risk-badge { background-color: #FCE8E6; color: #D93025; }
+
+/* ---------- Probability bars ---------- */
+.sc-prob-title { font-size: 0.85rem; font-weight: 600; color: #202124; margin-bottom: 0.75rem; }
+.sc-prob-row { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.7rem; }
+.sc-prob-label { width: 70px; font-weight: 600; font-size: 0.83rem; color: #3C4043; }
+.sc-prob-bar-bg { flex: 1; background-color: #F1F3F4; border-radius: 10px; height: 16px; overflow: hidden; }
+.sc-prob-bar-fill { height: 100%; border-radius: 10px; transition: width 0.4s ease; }
+.sc-prob-pct { width: 46px; text-align: right; font-size: 0.85rem; font-weight: 600; color: #3C4043; }
+.sc-prob-note { font-size: 0.78rem; color: #80868B; margin-top: 0.5rem; }
+
+/* ---------- Factor info cards ---------- */
+.sc-factor-grid { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 0.5rem; }
+.sc-factor-card { flex: 1; min-width: 180px; background-color: #FFFFFF; border: 1px solid #E8EAED; border-radius: 10px; padding: 0.9rem 1rem; }
+.sc-factor-card-title { font-size: 0.85rem; font-weight: 700; color: #202124; margin-bottom: 0.25rem; }
+.sc-factor-card-desc { font-size: 0.78rem; color: #5F6368; line-height: 1.4; }
+
+/* ---------- SHAP contribution rows ---------- */
+.sc-contrib-row { display: flex; justify-content: space-between; align-items: center; padding: 0.55rem 0; border-bottom: 1px solid #F1F3F4; }
+.sc-contrib-name { font-size: 0.87rem; color: #202124; font-weight: 500; }
+.sc-contrib-value { font-size: 0.87rem; font-weight: 700; display: flex; align-items: center; gap: 0.3rem; }
+.sc-contrib-up { color: #D93025; }
+.sc-contrib-down { color: #1E8E3E; }
+.sc-explain-note { font-size: 0.8rem; color: #5F6368; margin-top: 0.8rem; line-height: 1.5; background-color: #F8F9FA; border-radius: 8px; padding: 0.75rem 0.9rem; }
+
+/* ---------- Metric cards ---------- */
+.sc-metric-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.5rem; }
+.sc-metric-card { flex: 1; min-width: 130px; background-color: #F8F9FA; border-radius: 10px; padding: 0.75rem 0.9rem; text-align: center; }
+.sc-metric-value { font-size: 1.25rem; font-weight: 700; color: #1A73E8; }
+.sc-metric-label { font-size: 0.72rem; color: #5F6368; margin-top: 0.15rem; }
+
+/* ---------- Disclaimer ---------- */
+.sc-disclaimer {
+    background-color: #F8F9FA; border: 1px solid #E8EAED; border-radius: 10px;
+    padding: 0.9rem 1.1rem; font-size: 0.8rem; color: #5F6368; margin-top: 2rem; line-height: 1.5;
+}
+.sc-disclaimer-title { font-size: 0.82rem; font-weight: 700; color: #3C4043; margin-bottom: 0.25rem; }
+
+/* ---------- Primary button ---------- */
+div.stButton > button:first-child {
+    background-color: #1A73E8; color: #FFFFFF; font-weight: 600;
+    padding: 0.55rem 2.2rem; border-radius: 8px; border: none; font-size: 0.92rem;
+    box-shadow: 0 1px 2px rgba(60,64,67,0.3);
+}
+div.stButton > button:first-child:hover { background-color: #1765CC; }
+
+hr { border-color: #E8EAED; margin: 1.5rem 0; }
